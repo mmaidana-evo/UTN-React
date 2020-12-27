@@ -1,5 +1,6 @@
 import "./Layout.css";
 import logo from '../logo.svg';
+import Nav from 'react-bootstrap/Nav';
 
 function Layout(){
     return(
@@ -18,7 +19,14 @@ function Layout(){
                         </div>              
                     </div>
                 </div>
-  
+                <Nav variant="tabs" defaultActiveKey="/home">
+                    <Nav.Item>
+                        <Nav.Link href="/home">Active</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link href="/other">Other</Nav.Link>
+                    </Nav.Item>
+                </Nav>
                 <div className="formStyle">
                     <fieldset>
                         <legend><span class="balloon">!</span> Titulo</legend>
