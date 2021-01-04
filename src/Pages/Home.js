@@ -30,9 +30,9 @@ function Home(){
     }else{
         return(
             <>
-            <legend><span class="balloon">!</span> Home</legend>
+            <legend><span className="balloon">!</span> Home</legend>
             <main>
-                {productList.map((prodLi)=><Productos productos={prodLi}/>)}
+                {productList.map((prodLi)=><Productos key={prodLi.id} productos={prodLi}/>)}
             </main>
             </>
         )
