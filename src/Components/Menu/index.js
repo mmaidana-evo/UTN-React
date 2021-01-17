@@ -5,9 +5,9 @@ function Menu(props){
     return(
         <>
         <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home">TP02</Navbar.Brand>
+            <Navbar.Brand href="#home">TP03</Navbar.Brand>
             <Nav className="mr-auto">
-                {props.data.map(opcion=><OptionMenu opcion={opcion}/>)}
+                {props.data.map(opcion=><OptionMenu key={opcion.path} opcion={opcion}/>)}
             </Nav>
         </Navbar>
         </>        

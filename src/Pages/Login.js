@@ -1,25 +1,49 @@
-import React from "react";
+import React, {useState} from "react";
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import FormGroup from '../Components/Formulario/FormGroup';
+import ButtonSpinner from '../Components/Formulario/ButtonSpinner';
+import firebase from '../Config/Firebase';
+import {useHistory} from "react-router-dom";
 
 function Login(){
+    const [form, setForm] = useState({
+        c_email:'',
+        c_password:''
+    });
+    const [loading, setLoading] = useState(false);
+    const history = useHistory();
+    
+    const handleChange = (e)=>{
+        const target = e.target;
+        const value = target.value
+        const name = target.name;
+
+        setForm({...form, [name]:value}); 
+    }
+
+    const handleSubmit = (e)=>{
+        e.preventDefault();     
+        setLoading(true);    
+        firebase.auth.signInWithEmailAndPassword(form.c_email, form.c_password)
+        .then((data)=>{
+            console.log("Usuario logueado",data)
+            setLoading(false);
+            history.push("/")
+        })
+        .catch((error)=>{
+            console.log("Error",error)
+            setLoading(false);
+        })   
+    }
+
     return(
         <>
-        <legend><span class="balloon">!</span> Login</legend>
+        <legend><span className="balloon">!</span> Login</legend>
         <main>
-            <Form>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="Ingrese su Email" />
-                </Form.Group>
-
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Contraseña</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Ingresar
-                </Button>
+            <Form onSubmit={handleSubmit}>
+                <FormGroup name="c_email" label="Email" type="email" placeholder="Ingrese su Email" value={form.d_nombre} onchange={handleChange}/>
+                <FormGroup name="c_password" label="Contraseña" type="password" placeholder="Ingrese su Contraseña" value={form.d_nombre} onchange={handleChange}/>
+                <ButtonSpinner text="Ingresar" loading={loading}/>
             </Form>
         </main>
         </>

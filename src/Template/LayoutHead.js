@@ -12,7 +12,7 @@ function LayoutHead(){
                 <div className="tblHijo">
                     Desarrollo en React .JS
                     <br></br>
-                    T.P. Modulo N°2
+                    T.P. Modulo N°3
                 </div>              
             </div>
         </div>

@@ -2,6 +2,9 @@ import React,{useState,useEffect} from "react";
 import Productos from "../Components/Productos";
 import {getProductos} from "../Services/ServiceProductos";
 import Spinner from 'react-bootstrap/Spinner';
+import firebase from "../Config/Firebase";
+import {Link} from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 function Home(){
 
@@ -10,11 +13,17 @@ function Home(){
 
     useEffect(
         ()=>{
-            getProductos()
-            .then((data)=>{
-                // console.log('Resp. getProductos: ',data.data);
+            // getProductos()
+            // .then((data)=>{
+            //     // console.log('Resp. getProductos: ',data.data);
+            //     setLoading(false);
+            //     setProductos(data.data);
+            // })
+            firebase.db.collection("productos")
+            .get()
+            .then(data=>{
                 setLoading(false);
-                setProductos(data.data);
+                setProductos(data.docs);
             })
         },[]
     )
@@ -30,9 +39,14 @@ function Home(){
     }else{
         return(
             <>
-            <legend><span class="balloon">!</span> Home</legend>
+            <legend><span className="balloon">!</span> Home</legend>
             <main>
-                {productList.map((prodLi)=><Productos productos={prodLi}/>)}
+                {productList.map((prodLi)=><Productos key={prodLi.id} productos={prodLi}/>)}
+                <span style={{float:"right",marginTop:"10px"}}>
+                    <Link to={"/producto/alta"}>
+                        <Button variant="primary">Alta de Producto</Button>
+                    </Link>
+                </span>
             </main>
             </>
         )
