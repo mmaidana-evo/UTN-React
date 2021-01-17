@@ -29,7 +29,7 @@ function Registro(){
     }
 
     const onSubmit = (e)=>{
-        e.preventDefault(); //--> evita que se recargue la pagina
+        // e.preventDefault(); //--> evita que se recargue la pagina, si lo dejo descomentadono no funciona
 
         setLoading(true);
         firebase.auth.createUserWithEmailAndPassword(form.c_email, form.c_password)
@@ -52,14 +52,15 @@ function Registro(){
             })
         })
         .catch((error)=>{
-            console.log("Error createUser",error)
+            console.log("Error createUser",error);
+            alert(error.message);
             setLoading(false);
         })   
     }
 
     return(
         <>
-        <legend><span class="balloon">!</span> Registro</legend>
+        <legend><span className="balloon">!</span> Registro</legend>
         <main>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <FormGroup name="d_nombre" label="Nombre" type="text" placeholder="Ingrese su Nombre" value={form.d_nombre} onchange={handleChange} ref={register({required: true})} errors={errors.d_nombre}/>

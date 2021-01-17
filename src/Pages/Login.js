@@ -38,7 +38,7 @@ function Login(){
 
     return(
         <>
-        <legend><span class="balloon">!</span> Login</legend>
+        <legend><span className="balloon">!</span> Login</legend>
         <main>
             <Form onSubmit={handleSubmit}>
                 <FormGroup name="c_email" label="Email" type="email" placeholder="Ingrese su Email" value={form.d_nombre} onchange={handleChange}/>
