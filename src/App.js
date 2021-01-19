@@ -4,6 +4,7 @@ import {BrowserRouter} from "react-router-dom";
 import LayoutHead from './Template/LayoutHead';
 import Menu from './Components/Menu/index';
 import RoutesWeb from "./Components/Menu/RoutesWeb";
+import GlobalState from "./Context/GlobalState";
 
 
 function App() {
@@ -21,19 +22,21 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <div className="App">
-          <header className="App-header">
-            <LayoutHead/>
-            <Menu data={opciones}/>
-            <div className="formStyle">
-              <fieldset>
-                <RoutesWeb/>
-              </fieldset>
-            </div>
-          </header>
-        </div>
-      </BrowserRouter>
+      <GlobalState>
+        <BrowserRouter>
+          <div className="App">
+            <header className="App-header">
+              <LayoutHead/>
+              <Menu data={opciones}/>
+              <div className="formStyle">
+                <fieldset>
+                  <RoutesWeb/>
+                </fieldset>
+              </div>
+            </header>
+          </div>
+        </BrowserRouter>
+      </GlobalState>
     </>
   );
 }
