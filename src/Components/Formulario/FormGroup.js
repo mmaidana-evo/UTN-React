@@ -3,7 +3,7 @@ import {Form} from 'react-bootstrap';
 
 function FormGroup(props){
     const {name, label, type, placeholder, value, onchange, error} = props; 
-    console.log(error);
+    // console.log(error);
     return(
         <>
         <Form.Group controlId={"formBasic"+name}>

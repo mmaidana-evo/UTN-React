@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useState,useContext} from "react";
 import Form from 'react-bootstrap/Form';
 import FormGroup from '../Components/Formulario/FormGroup';
 import ButtonSpinner from '../Components/Formulario/ButtonSpinner';
 import firebase from '../Config/Firebase';
 import {useHistory} from "react-router-dom";
+import NetContext from "../Context/NetContext";
 
 function Login(){
     const [form, setForm] = useState({
@@ -12,6 +13,7 @@ function Login(){
     });
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+    const context = useContext(NetContext);
     
     const handleChange = (e)=>{
         const target = e.target;
@@ -26,8 +28,11 @@ function Login(){
         setLoading(true);    
         firebase.auth.signInWithEmailAndPassword(form.c_email, form.c_password)
         .then((data)=>{
-            console.log("Usuario logueado",data)
+            console.log("Usuario logueado",data);
+
+            context.loginUser(form.c_email);
             setLoading(false);
+            
             history.push("/")
         })
         .catch((error)=>{

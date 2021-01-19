@@ -18,7 +18,7 @@ function ProductoAlta(){
         setDatos({...datos, [name]:value}); 
     }
     
-    const handleSubmit =  (e)=>{
+    const handleSubmit = (e)=>{
         e.preventDefault();
         setLoading(true);    
         firebase.db.collection('productos').add(datos)
