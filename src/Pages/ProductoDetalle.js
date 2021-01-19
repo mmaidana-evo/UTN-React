@@ -5,6 +5,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import firebase from "../Config/Firebase";
 import {useHistory} from "react-router-dom";
 import {Link} from 'react-router-dom';
+import NetContext from "../Context/NetContext";
 
 function ProductoDetalle(props){    
     const [loading,setLoading] = useState(true);
@@ -51,20 +52,33 @@ function ProductoDetalle(props){
     }else{        
         return(
             <>
-            <legend><span className="balloon">!</span> {producto.name}</legend>
-            <main>
-                <p>{producto.description}</p>
-                <div style={{textAlign:"right"}}>Precio: $ {producto.price}</div>
-                <div style={{marginTop:"10px"}}></div>
-                <Button variant="primary">Comprar</Button>
-                <span style={{float:"right"}}>
-                    <Link to={"/productos/editar/"+props.match.params.id}>
-                        <Button variant="primary" style={{marginRight:"10px"}}>Editar</Button>
-                    </Link>
-                    <Button variant="primary" onClick={handleDelete}>Eliminar</Button>
-                </span>
-            </main>
-            </>
+            <NetContext.Consumer>
+                {
+                    context=>
+                    <>
+                    <legend><span className="balloon">!</span> {producto.name}</legend>
+                    <main>
+                        <p  style={{textAlign:"justify"}}>{producto.description}</p>
+                        <div style={{textAlign:"left"}}>SKU: {props.match.params.id}</div>
+                        <div style={{textAlign:"right", fontSize:"calc(20px + 2vmin)"}}><strong>Precio: ${producto.price}</strong></div>
+                        <div style={{marginTop:"10px"}}></div>
+                        <Button variant="primary">Agregar al Carrito</Button>
+                        <span style={{float:"right"}}>
+                            {
+                                context.userlogin &&
+                                    <>
+                                    <Link to={"/productos/editar/"+props.match.params.id}>
+                                        <Button variant="primary" style={{marginRight:"10px"}}>Editar</Button>
+                                    </Link>
+                                    <Button variant="primary" onClick={handleDelete}>Eliminar</Button>
+                                    </>
+                            }
+                        </span>
+                    </main>
+                    </>
+                }
+            </NetContext.Consumer>
+            </>      
         )
     }
 }

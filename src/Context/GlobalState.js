@@ -1,21 +1,21 @@
 import React,{useState} from "react";
-import NetContext from "./NetContext"
+import NetContext from "./NetContext";
 
 function GlobalState(props){    
-    const [userlogin,setLogin] = useState(sessionStorage.getItem("userlogin"));
-    const [username,setUserName] = useState(sessionStorage.getItem("username"));
+    const [userlogin,setLogin] = useState(localStorage.getItem("userlogin"));
+    const [username,setUserName] = useState(localStorage.getItem("username"));
     
     const loginUser = (p_username) => {
         setLogin(true);
         setUserName(p_username);
-        sessionStorage.setItem("userlogin",true);
-        sessionStorage.setItem("username",p_username);
+        localStorage.setItem("userlogin",true);
+        localStorage.setItem("username",p_username);
     }
 
     const logoutUser = ()=>{
         setLogin(false);
-        sessionStorage.removeItem("userlogin");
-        sessionStorage.removeItem("username");
+        localStorage.removeItem("userlogin");
+        localStorage.removeItem("username");
     }
     
     return(
