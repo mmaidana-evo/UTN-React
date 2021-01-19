@@ -13,13 +13,26 @@ function Menu(props){
                     <Navbar bg="dark" variant="dark">
                         <Navbar.Brand href="#home">TP03</Navbar.Brand>
                         <Nav className="mr-auto">
+                            {props.data.map(opcion=>
+                                // <OptionMenu key={opcion.path} opcion={opcion}/>
+                                {
+                                    if(context.userlogin == true && opcion.viewlogin == 'S'){
+                                        return <OptionMenu key={opcion.path} opcion={opcion}/>
+                                    }
+                                    if(context.userlogin != true && opcion.viewlogin == 'N'){
+                                        return <OptionMenu key={opcion.path} opcion={opcion}/>
+                                    }
+                                    if(opcion.viewlogin == 'H'){
+                                        return <OptionMenu key={opcion.path} opcion={opcion}/>
+                                    }
+                                }
+                            )}
                             {
                                 context.userlogin &&
                                     <>
                                     <Nav.Link onClick={context.logoutUser}>Salir</Nav.Link>
                                     </>
                             }
-                            {props.data.map(opcion=><OptionMenu key={opcion.path} opcion={opcion}/>)}
                         </Nav>
                     </Navbar>
                     </>  

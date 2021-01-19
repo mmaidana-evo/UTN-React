@@ -9,9 +9,9 @@ import GlobalState from "./Context/GlobalState";
 
 function App() {
   const [opciones,setOpciones] = useState([
-    {path:"/", label:"Home"},
-    {path:"/login", label:"Login"},
-    {path:"/registro", label:"Registro"}
+    {path:"/", label:"Home", viewlogin:"H"},
+    {path:"/login", label:"Login", viewlogin:"N"},
+    {path:"/registro", label:"Registro", viewlogin:"N"}
   ])
 
   const handleClick = ()=>{
